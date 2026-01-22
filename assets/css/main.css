@@ -928,6 +928,33 @@ input, select, textarea {
 					background-color: rgba(255, 255, 255, 0.175);
 				}
 
+	/* Contact section overrides */
+	#contact ul.icons {
+		display: flex;            
+		flex-direction: column;   
+		align-items: flex-start;  
+		gap: 1rem;                
+	}
+
+	#contact ul.icons li {
+		display: flex;            
+		align-items: center;
+		padding: 0;               
+	}
+
+	#contact ul.icons li a {
+		border-radius: 1;       /* removes the circle */
+		width: auto;            /* lets width adjust to content */
+		height: auto;           /* lets height adjust to content */
+		padding: 0.25rem 0.5rem; /* optional spacing */
+		box-shadow: none;       /* remove circular border if you want */           
+	}
+
+	#contact ul.icons li a .label {
+		display: inline;          
+	}
+
+
 /* Table */
 
 	.table-wrapper {
@@ -1140,9 +1167,12 @@ input, select, textarea {
 			-ms-transition-delay: 0.75s;
 			transition-delay: 0.75s;
 			background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("../../images/overlay.png");
-			background-size: auto, 256px 256px;
-			background-position: center, center;
-			background-repeat: no-repeat, repeat;
+			background-size: auto,
+ 256px 256px;
+			background-position: center,
+ center;
+			background-repeat: no-repeat,
+ repeat;
 			z-index: 2;
 		}
 
@@ -1177,6 +1207,12 @@ input, select, textarea {
 			background-color: #000000;
 		}
 
+		/* Center main content vertically on home page */
+		body.home #wrapper {
+    	justify-content: center; /* change from space-between to center */
+    	text-align: center;      /* center text inside */
+		}
+
 /* Wrapper */
 
 	#wrapper {
@@ -1192,10 +1228,10 @@ input, select, textarea {
 		-webkit-align-items: center;
 		-ms-align-items: center;
 		align-items: center;
-		-moz-justify-content: space-between;
-		-webkit-justify-content: space-between;
-		-ms-justify-content: space-between;
-		justify-content: space-between;
+		-moz-justify-content: center;
+		-webkit-justify-content: center;
+		-ms-justify-content: center;
+		justify-content: center;
 		position: relative;
 		min-height: 100vh;
 		width: 100%;
