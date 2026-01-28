@@ -15,7 +15,7 @@
     <!-- Header -->
     <header id="header">
       <div class="logo">
-        <span class="icon fa-user"></span>
+        <img src="images/profile.jpg" alt="Qizhe Yew" class="profile-pic">
       </div>
       <div class="content">
         <div class="inner">
@@ -27,6 +27,7 @@
         <ul>
           <li><a href="#intro">Intro</a></li>
           <li><a href="#work">Projects</a></li>
+          <li><a href="#resume">Resume</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -45,14 +46,760 @@
       <!-- Work -->
       <article id="work">
         <h2 class="major">Projects</h2>
-        <span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+        <span class="image main"><img src="images/blackhole.jpg" alt="" /></span>
         <ul>
-          <li><strong>Portfolio Website:</strong> Built this responsive portfolio using HTML5, CSS3, and JavaScript.</li>
-          <li><strong>Data Wrangling Dashboard:</strong> Created a Jupyter-based interactive tool to clean and visualize datasets.</li>
-          <li><strong>Chat App (Python & UDP):</strong> Developed a terminal-based chat server using sockets and threading.</li>
-          <li><strong>Matrix Calculator:</strong> CLI app for linear algebra operations using C++.</li>
+          <div class="project-card">
+            <strong>Mental Health LLM Chatbot (LLM, LoRA, Prompt Engineering)</strong><br />
+            <em>Fine-tuned LLaMA-2 using LoRA with BERTScore evaluation.</em><br />
+            <a href="#llm-project" class="project-button">View Full Project →</a>
+          </div>
+          <div class="project-card">
+            <strong>ECG Arrhythmia Classification (PyTorch, Deep Learning, Medical Data Processing)</strong><br />
+            <em>Built and evaluated a deep feedforward neural network to classify heartbeats using the MIT-BIH Arrhythmia dataset (100k+ ECG samples).</em><br />
+            <a href="#ecg-classification-project" class="project-button">View full project →</a>
+          </div>
+          <div class="project-card">
+            <strong>Sentiment/Emotion Classification (Pytorch, Deep Learning, Image Classification)</strong><br />
+            <em>Developed and evaluated a neural network–based sentiment classifier to predict emotional polarity from images, focusing on preprocessing, embedding strategies, and model optimisation, demonstrating end-to-end computer vision model development.</em><br />
+            <a href="#sentiment-image-classification-project" class="project-button">View full project →</a>
+          </div>
+          <div class="project-card">
+            <strong>Wheelchair-Accessible Pathfinding System (Graph Modelling, Heuristic Search, Algorithm Design)</strong><br />
+            <em>Designed and implemented an intelligent pathfinding system for a university campus that accounts for wheelchair accessibility, obstacles, and user preferences, using graph-based modelling and search algorithms to generate efficient and inclusive routes.</em><br />
+            <a href="#wheelchair-pathfinding-project" class="project-button">View full project →</a>
+          </div>
+          <div class="project-card">
+            <strong>Automated Planning with PDDL (Symbolic AI, Automated Planning, Constraint-Based Reasoning)</strong><br />
+              <em>Designed and implemented goal-directed planning agents using PDDL, modelling multiple domains to demonstrate symbolic reasoning, constraint-based action planning, and solver-driven plan generation under varying problem complexities.</em><br />
+            <a href="#automated-planning-project" class="project-button">View full project →</a>
+          </div>
         </ul>
       </article>
+
+    <!-- LLM Project -->
+    <article id="llm-project">
+      <h2 class="major">Mental Health LLM Chatbot</h2>
+
+      <p>
+        <strong>Building a Mental Health Chatbot Using LLMs and Fine-Tuning</strong><br />
+        This project focuses on developing a mental health conversational assistant
+        using large language models (LLMs), enhanced through prompt engineering,
+        parameter tuning, and fine-tuning on a domain-specific dataset.
+      </p>
+
+      <h3>Why This Project Matters</h3>
+      <p>
+        Mental health conversations require responses that are not only coherent,
+        but also safe, empathetic, and clinically informed. This project demonstrates
+        how targeted fine-tuning and evaluation can improve an LLM’s alignment with
+        these requirements.
+      </p>
+
+      <hr />
+
+      <h3>Environment Setup</h3>
+      <ul>
+        <li><strong>Development environment:</strong> Google Colab</li>
+        <li><strong>Operating system:</strong> Linux (Colab)</li>
+        <li><strong>Python version:</strong> Python 3.x</li>
+        <li>
+          <strong>Model provider:</strong> Hugging Face<br />
+          <a href="https://huggingface.co/meta-llama/Llama-2-7b" target="_blank">
+            LLaMA-2-7B model page
+          </a>
+        </li>
+      </ul>
+
+      <hr />
+
+      <h3>LLM Configuration</h3>
+      <ul>
+        <li><strong>Base model:</strong> LLaMA-2-7B</li>
+        <li><strong>Fine-tuning method:</strong> LoRA (parameter-efficient fine-tuning)</li>
+        <li><strong>Quantization:</strong> 4-bit (BitsAndBytes)</li>
+        <li><strong>Libraries:</strong> Transformers, PEFT, Datasets, Torch, BertScore</li>
+      </ul>
+
+      <hr />
+
+      <h3>Dataset</h3>
+      <p>
+        <strong>MentalChat16K: A Benchmark Dataset for Conversational Mental Health Assistance</strong>
+      </p>
+      <ul>
+        <li><strong>Instruction:</strong> System prompt for mental health counselling</li>
+        <li><strong>Input:</strong> User mental health query or concern</li>
+        <li><strong>Output:</strong> Professional mental health response</li>
+        <li>
+          Dataset link:
+          <a href="https://huggingface.co/datasets/ShenLab/MentalChat16K" target="_blank">
+            MentalChat16K on Hugging Face
+          </a>
+        </li>
+      </ul>
+
+      <h4>Preprocessing Steps</h4>
+      <ul>
+        <li>Instruction enrichment with safety guidelines</li>
+        <li>Structured sequence formatting for dialogue consistency</li>
+        <li>Tokenization with 512 max length and right padding</li>
+        <li>Label masking so only assistant responses contribute to loss</li>
+      </ul>
+
+      <hr />
+
+      <h3>Model Improvement Strategy</h3>
+      <p>
+        The model was improved incrementally through prompt engineering, parameter
+        tuning, and fine-tuning. Performance was evaluated at each stage using
+        BERTScore.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>F1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Baseline (Zero-shot)</td>
+            <td>0.858</td>
+            <td>0.836</td>
+            <td>0.847</td>
+          </tr>
+          <tr>
+            <td>Few-shot Prompting</td>
+            <td>0.829</td>
+            <td>0.845</td>
+            <td>0.837</td>
+          </tr>
+          <tr>
+            <td>Parameter Tuning</td>
+            <td>0.862</td>
+            <td>0.832</td>
+            <td>0.847</td>
+          </tr>
+          <tr>
+            <td><strong>Fine-tuning</strong></td>
+            <td><strong>0.889</strong></td>
+            <td><strong>0.848</strong></td>
+            <td><strong>0.868</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        Results indicate that the base model already possessed strong mental health
+        reasoning capabilities. Fine-tuning introduced modest but consistent
+        improvements without signs of overfitting.
+      </p>
+
+      <hr />
+
+      <h3>Evaluation & Benchmarking</h3>
+      <ul>
+        <li><strong>Metric:</strong> BERTScore (Precision, Recall, F1)</li>
+        <li>
+          <strong>Why BERTScore?</strong>
+          Measures semantic similarity between generated and reference responses,
+          making it well-suited for conversational AI evaluation.
+        </li>
+        <li><strong>Dataset split:</strong> 90% training / 10% testing</li>
+        <li><strong>Test samples:</strong> 20 conversations</li>
+      </ul>
+
+      <p>
+        The evaluation plots show that fine-tuning slightly improved semantic
+        alignment, while few-shot prompting offered limited benefit post-training,
+        suggesting strong prior alignment in the base model.
+      </p>
+
+      <hr />
+
+      <h3>Demo & Resources</h3>
+      <ul>
+        <li>
+          <a href="https://youtu.be/-JSUCAH1k-s" target="_blank">
+            ▶ Video demo of the chatbot
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/q1zhe/Mental-Health-Assistant-LLM-Chatbot" target="_blank">
+            GitHub repository 
+          </a>
+        </li>
+      </ul>
+
+      <div class="project-footer">
+      <a href="#work" class="button small">← Back to Projects</a>
+      </div>
+    </article>
+
+
+    <!-- ECG Project -->
+    <article id="ecg-classification-project">
+      <h2 class="major">ECG Arrhythmia Classification</h2>
+
+      <p>
+        <strong>Deep Learning for ECG Heartbeat Classification</strong><br />
+        This project focuses on building and evaluating a deep neural network
+        to classify electrocardiogram (ECG) heartbeats into clinically relevant
+        arrhythmia categories using supervised learning.
+      </p>
+
+      <h3>Why This Project Matters</h3>
+      <p>
+        Automated ECG classification can assist clinicians by providing fast and
+        consistent interpretation of cardiac signals. This project demonstrates
+        how deep learning models can learn meaningful physiological patterns from
+        raw numerical signals while addressing overfitting and class imbalance.
+      </p>
+
+      <hr />
+
+      <h3>Environment Setup</h3>
+      <ul>
+        <li><strong>Development environment:</strong> Google Colab</li>
+        <li><strong>Operating system:</strong> Linux (Colab)</li>
+        <li><strong>Python version:</strong> Python 3.x</li>
+        <li><strong>Framework:</strong> PyTorch</li>
+      </ul>
+
+      <hr />
+
+      <h3>Model Architecture</h3>
+      <ul>
+        <li><strong>Model type:</strong> Deep Feedforward Neural Network</li>
+        <li><strong>Input:</strong> Preprocessed ECG feature vectors</li>
+        <li><strong>Hidden layers:</strong> Fully connected layers with ReLU</li>
+        <li><strong>Regularisation:</strong> Dropout & Batch Normalisation</li>
+        <li><strong>Output:</strong> 5-class softmax classification</li>
+      </ul>
+
+      <hr />
+
+      <h3>Dataset</h3>
+      <p>
+        <strong>MIT-BIH Arrhythmia Dataset</strong>
+      </p>
+      <ul>
+        <li><strong>Samples:</strong> 100,000+ labelled ECG heartbeats</li>
+        <li><strong>Classes:</strong> Normal and four arrhythmia categories</li>
+        <li><strong>Features:</strong> Extracted numerical ECG signal features</li>
+      </ul>
+
+      <h4>Preprocessing Steps</h4>
+      <ul>
+        <li>Feature scaling and normalisation</li>
+        <li>Label encoding for multi-class classification</li>
+        <li>Stratified train/validation split</li>
+        <li>Tensor conversion for PyTorch training</li>
+      </ul>
+
+      <hr />
+
+      <h3>Training Strategy</h3>
+      <p>
+        The model was trained using cross-entropy loss and optimised with Adam.
+        Regularisation techniques were incrementally introduced to improve
+        generalisation and reduce overfitting.
+      </p>
+
+      <ul>
+        <li><strong>Loss function:</strong> Cross-entropy loss</li>
+        <li><strong>Optimizer:</strong> Adam</li>
+        <li><strong>Batch size:</strong> Tuned experimentally</li>
+        <li><strong>Monitoring:</strong> TensorBoard (loss & accuracy)</li>
+      </ul>
+
+      <hr />
+
+      <h3>Evaluation & Results</h3>
+      <p>
+        Model performance was evaluated using accuracy on a held-out validation set.
+        Regularisation significantly improved generalisation performance.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Configuration</th>
+            <th>Validation Accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Baseline (No Regularisation)</td>
+            <td>~98.2%</td>
+          </tr>
+          <tr>
+            <td>With Dropout</td>
+            <td>~98.6%</td>
+          </tr>
+          <tr>
+            <td><strong>Dropout + BatchNorm</strong></td>
+            <td><strong>~98.8%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        Training curves indicate stable convergence with reduced overfitting after
+        introducing regularisation, demonstrating effective model optimisation.
+      </p>
+
+      <hr />
+
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>Deep neural networks can effectively model ECG signal patterns</li>
+        <li>Regularisation is critical for medical signal classification tasks</li>
+        <li>Careful monitoring helps diagnose overfitting early</li>
+      </ul>
+
+      <hr />
+
+      <h3>Resources</h3>
+      <ul>
+        <li>
+          <a href="https://github.com/q1zhe/ECG-Arrhythmia-Classification" target="_blank">
+            GitHub repository
+          </a>
+        </li>
+      </ul>
+
+      <div class="project-footer">
+      <a href="#work" class="button small">← Back to Projects</a>
+      </div>
+    </article>
+
+
+    <!-- Sentiment Image Classification Project -->
+    <article id="sentiment-image-classification-project">
+      <h2 class="major">Sentiment Image Classification</h2>
+
+      <p>
+        <strong>Deep Learning for Emotion Recognition from Images</strong><br />
+        This project explores the use of convolutional neural networks (CNNs) to
+        classify human emotions from facial images into six sentiment categories
+        using supervised deep learning.
+      </p>
+
+      <h3>Why This Project Matters</h3>
+      <p>
+        Accurate emotion recognition is a challenging computer vision problem with
+        applications in mental health support systems, human–computer interaction,
+        and assistive technologies. This project demonstrates how deep learning
+        models handle subtle visual cues, class imbalance, and generalisation limits
+        when working with real-world image data.
+      </p>
+
+      <hr />
+
+      <h3>Environment Setup</h3>
+      <ul>
+        <li><strong>Development environment:</strong> Google Colab</li>
+        <li><strong>Operating system:</strong> Linux (Colab)</li>
+        <li><strong>Python version:</strong> Python 3.x</li>
+        <li><strong>Framework:</strong> PyTorch</li>
+      </ul>
+
+      <hr />
+
+      <h3>Model Architecture</h3>
+      <ul>
+        <li><strong>Model type:</strong> Convolutional Neural Network (CNN)</li>
+        <li><strong>Input:</strong> RGB facial images</li>
+        <li><strong>Layers:</strong> Convolution, Batch Normalisation, ReLU, Max Pooling</li>
+        <li><strong>Regularisation:</strong> Dropout & Adaptive Pooling</li>
+        <li><strong>Output:</strong> 6-class softmax classification</li>
+      </ul>
+
+      <hr />
+
+      <h3>Dataset</h3>
+      <p>
+        <strong>Emotion Image Dataset</strong>
+      </p>
+      <ul>
+        <li><strong>Total samples:</strong> 1,148 labelled images</li>
+        <li><strong>Classes:</strong> Happy, Sad, Fear, Pain, Anger, Disgust</li>
+        <li><strong>Challenge:</strong> Highly imbalanced class distribution</li>
+      </ul>
+
+      <h4>Preprocessing Steps</h4>
+      <ul>
+        <li>Image resizing and normalisation</li>
+        <li>Stratified train/validation/test split (80/10/10)</li>
+        <li>Data augmentation (rotation, flipping, colour jitter)</li>
+        <li>Tensor conversion for PyTorch training</li>
+      </ul>
+
+      <hr />
+
+      <h3>Training Strategy</h3>
+      <p>
+        The model was trained using class-weighted cross-entropy loss and optimised
+        with Adam. Techniques such as weighted sampling and data augmentation were
+        used to mitigate class imbalance and reduce overfitting.
+      </p>
+
+      <ul>
+        <li><strong>Loss function:</strong> Weighted cross-entropy</li>
+        <li><strong>Optimizer:</strong> Adam</li>
+        <li><strong>Sampling:</strong> WeightedRandomSampler</li>
+        <li><strong>Monitoring:</strong> Training & validation loss trends</li>
+      </ul>
+
+      <hr />
+
+      <h3>Evaluation & Results</h3>
+      <p>
+        Model performance was evaluated using macro-averaged F1 score to ensure
+        balanced performance across all emotion classes. Confusion matrices were
+        used to analyse class-level misclassification.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Configuration</th>
+            <th>Test Accuracy</th>
+            <th>Macro F1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Baseline CNN</td>
+            <td>~51%</td>
+            <td>~50%</td>
+          </tr>
+          <tr>
+            <td>With Data Augmentation</td>
+            <td>~46%</td>
+            <td>~44%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        Results highlight the trade-off between robustness and computational cost,
+        showing that data augmentation improves generalisation only when sufficient
+        training time is available.
+      </p>
+
+      <hr />
+
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>Class imbalance significantly affects emotion classification performance</li>
+        <li>Macro-averaged metrics are essential for fair evaluation</li>
+        <li>Data augmentation improves robustness but increases training cost</li>
+      </ul>
+
+      <hr />
+
+      <h3>Resources</h3>
+      <ul>
+        <li>
+          <a href="https://github.com/q1zhe/Sentiment-Image-Classification" target="_blank">
+            GitHub repository
+          </a>
+        </li>
+      </ul>
+
+      <div class="project-footer">
+      <a href="#work" class="button small">← Back to Projects</a>
+      </div>
+    </article>
+
+
+    <!-- Wheelchair Pathfinding Project -->
+    <article id="wheelchair-pathfinding-project">
+      <h2 class="major">Wheelchair-Accessible Campus Pathfinding</h2>
+
+      <p>
+        <strong>Accessibility-Aware Pathfinding Using A* and Dijkstra’s Algorithm</strong><br />
+        This project focuses on designing an intelligent navigation system for a university
+        campus that accounts for wheelchair accessibility, obstacles, and real-world terrain
+        constraints using graph-based search algorithms.
+      </p>
+
+      <h3>Why This Project Matters</h3>
+      <p>
+        Most navigation systems optimise for shortest distance while ignoring accessibility
+        requirements, which can lead wheelchair users to unsafe or unusable routes.
+        This project demonstrates how AI search algorithms can be adapted to support
+        inclusive navigation by incorporating accessibility constraints and obstacle-aware
+        heuristics.
+      </p>
+
+      <hr />
+
+      <h3>Environment Setup</h3>
+      <ul>
+        <li><strong>Development environment:</strong> Local Python environment</li>
+        <li><strong>Operating system:</strong> macOS / Linux</li>
+        <li><strong>Python version:</strong> Python 3.x</li>
+        <li><strong>Data source:</strong> Google My Maps (KML export)</li>
+      </ul>
+
+      <hr />
+
+      <h3>Problem Formulation</h3>
+      <p>
+        The campus environment is modelled as a weighted graph, where nodes represent
+        locations (e.g. buildings, lifts, toilets) and edges represent paths between them.
+        Each path is annotated with accessibility metadata such as obstacle presence
+        (e.g. stairs) and wheelchair accessibility.
+      </p>
+
+      <ul>
+        <li>Wheelchair-accessible paths are always usable</li>
+        <li>Inaccessible paths may be removed or penalised depending on user preference</li>
+        <li>Users can toggle accessibility constraints for flexible routing</li>
+      </ul>
+
+      <hr />
+
+      <h3>Algorithms & Techniques</h3>
+      <ul>
+        <li><strong>A* Search:</strong> Primary pathfinding algorithm</li>
+        <li><strong>Dijkstra’s Algorithm:</strong> Used for performance comparison</li>
+        <li><strong>Graph modelling:</strong> Weighted undirected graph</li>
+        <li><strong>Goal-based intelligent agent:</strong> Selects optimal path to destination</li>
+      </ul>
+
+      <h4>Heuristics Implemented</h4>
+      <ul>
+        <li><strong>Euclidean distance:</strong> Straight-line distance (baseline)</li>
+        <li><strong>Haversine distance:</strong> Real-world geographic distance</li>
+        <li><strong>Accessibility-aware heuristic:</strong> Penalises obstacles such as stairs</li>
+      </ul>
+
+      <hr />
+
+      <h3>System Features</h3>
+      <ul>
+        <li>Accessibility-only routing for wheelchair users</li>
+        <li>Obstacle-aware routing with configurable penalties</li>
+        <li>General routing without accessibility constraints</li>
+        <li>Nearest accessible facility awareness (e.g. accessible toilets)</li>
+        <li>Visualisation of nodes, accessible paths, obstacles, and selected routes</li>
+      </ul>
+
+      <hr />
+
+      <h3>Evaluation & Results</h3>
+      <p>
+        The results show that A* consistently explores fewer nodes than Dijkstra’s algorithm
+        while producing identical shortest paths. Introducing accessibility-aware heuristics
+        successfully alters route selection based on user needs without violating A*’s
+        admissibility requirements.
+      </p>
+
+      <ul>
+        <li><strong>Metric:</strong> Number of nodes explored</li>
+        <li><strong>Finding:</strong> A* is more efficient than Dijkstra on larger maps</li>
+        <li><strong>Outcome:</strong> Safer and more suitable routes for wheelchair users</li>
+      </ul>
+
+      <hr />
+
+      <h3>Visualization</h3>
+      <ul>
+        <li>Campus graph with accessible and inaccessible paths</li>
+        <li>Highlighted optimal route based on selected constraints</li>
+        <li>Comparison between accessibility-aware and unrestricted routing</li>
+      </ul>
+
+      <hr />
+
+      <h3>Skills Demonstrated</h3>
+      <ul>
+        <li>AI search algorithms (A*, Dijkstra)</li>
+        <li>Heuristic design and evaluation</li>
+        <li>Graph theory and pathfinding</li>
+        <li>Accessibility-aware system design</li>
+        <li>Python, NetworkX, Matplotlib, KML parsing</li>
+      </ul>
+
+      <hr />
+
+      <h3>Demo & Resources</h3>
+      <ul>
+        <li>
+          <a href="https://github.com/q1zhe/Wheelchair-Accessible-Pathfinding-System" target="_blank">
+            GitHub repository
+          </a>
+        </li>
+      </ul>
+
+      <div class="project-footer">
+      <a href="#work" class="button small">← Back to Projects</a>
+      </div>
+    </article>
+
+    <!-- Automated Planning Project -->
+    <article id="automated-planning-project">
+      <h2 class="major">Automated Planning with PDDL</h2>
+
+      <p>
+        <strong>Symbolic AI Planning Using STRIPS and PDDL</strong><br />
+        This project explores automated planning through symbolic AI techniques,
+        using the Planning Domain Definition Language (PDDL) to model environments,
+        actions, and constraints. Multiple planning domains were implemented to
+        evaluate solver behaviour, plan optimality, and the impact of domain
+        complexity.
+      </p>
+
+      <h3>Why This Project Matters</h3>
+      <p>
+        Automated planning is a core area of artificial intelligence focused on
+        goal-directed reasoning under constraints. Unlike data-driven models,
+        symbolic planners rely on explicit knowledge representation and logical
+        inference. This project demonstrates an understanding of how intelligent
+        agents reason about actions, preconditions, and long-term goals.
+      </p>
+
+      <hr />
+
+      <h3>Environment Setup</h3>
+      <ul>
+        <li><strong>Development environment:</strong> Local Linux-based setup</li>
+        <li><strong>Planning language:</strong> PDDL (Planning Domain Definition Language)</li>
+        <li><strong>Planning framework:</strong> STRIPS-based planning</li>
+        <li><strong>Solvers:</strong> BFWS, LAMA</li>
+      </ul>
+
+      <hr />
+
+      <h3>Planning Framework</h3>
+      <ul>
+        <li><strong>State representation:</strong> Predicate-based world modelling</li>
+        <li><strong>Actions:</strong> Defined via preconditions and effects</li>
+        <li><strong>Goals:</strong> Explicit symbolic goal states</li>
+        <li><strong>Constraints:</strong> Logical restrictions enforced through domain design</li>
+      </ul>
+
+      <p>
+        Planning problems were formulated using STRIPS-style operators, enabling
+        solvers to generate valid action sequences that transform the initial state
+        into a desired goal state.
+      </p>
+
+      <hr />
+
+      <h3>Case Study 1: Gripper Domain</h3>
+      <p>
+        The Gripper domain models a robot tasked with transporting multiple objects
+        between rooms using two grippers. This domain highlights how planners
+        optimise action sequences by exploiting parallelism and resource constraints.
+      </p>
+
+      <ul>
+        <li>Multi-object transportation planning</li>
+        <li>Limited resources (two grippers)</li>
+        <li>Analysis of optimal vs suboptimal plans</li>
+      </ul>
+
+      <hr />
+
+      <h3>Case Study 2: Wumpus World</h3>
+      <p>
+        The Wumpus World domain introduces safety constraints, hazards, and
+        environment-dependent actions. The planner must reason about risk,
+        sequencing, and prerequisite actions (e.g., neutralising threats before
+        progression).
+      </p>
+
+      <ul>
+        <li>Hazard-aware action sequencing</li>
+        <li>Constraint-driven plan validation</li>
+        <li>Goal achievement under safety conditions</li>
+      </ul>
+
+      <hr />
+
+      <h3>Solver Comparison</h3>
+      <p>
+        Different planners were evaluated to compare search strategies and plan
+        efficiency under increasing domain complexity.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Planner</th>
+            <th>Search Strategy</th>
+            <th>Strengths</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BFWS</td>
+            <td>Novelty-based search</td>
+            <td>Efficient for small, structured domains</td>
+          </tr>
+          <tr>
+            <td>LAMA</td>
+            <td>Heuristic forward search</td>
+            <td>Scales better with increased complexity</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr />
+
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li>Symbolic planning enables transparent, interpretable decision-making</li>
+        <li>Domain modelling quality directly impacts planner performance</li>
+        <li>Different planners excel under different structural assumptions</li>
+      </ul>
+
+      <hr />
+
+      <h3>Resources</h3>
+      <ul>
+        <li>
+          <a href="https://github.com/q1zhe/Automated-Planning-With-PDDL" target="_blank">
+            GitHub repository
+          </a>
+        </li>
+      </ul>
+
+      <div class="project-footer">
+      <a href="#work" class="button small">← Back to Projects</a>
+      </div>
+    </article>
+
+
+      <!-- Resume -->
+      <article id="resume" class="resume-page">
+        <h2 class="major">Resume</h2>
+
+        <!-- Embed PDF -->
+        <iframe
+          src="assets/resume.pdf#toolbar=0"
+          class="resume-embed"
+          title="Resume"
+        ></iframe>
+
+        <!-- Open in new tab -->
+        <ul class="actions">
+          <li>
+            <a href="assets/resume.pdf" class="button primary" target="_blank">
+              Open in New Tab
+            </a>
+          </li>
+        </ul>
+      </article>
+
 
       <!-- Contact -->
       <article id="contact">
@@ -67,6 +814,7 @@
             </a>
           </li>
 
+          
           <li style="margin-bottom: 1rem;">
             <a href="https://github.com/q1zhe"
               target="_blank"
@@ -76,6 +824,7 @@
               <span style="margin-left: 0.75rem;">github.com/q1zhe</span>
             </a>
           </li>
+
 
           <li>
             <a href="https://www.linkedin.com/in/yew-qizhe-3465921b6/"
